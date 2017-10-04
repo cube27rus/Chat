@@ -1,0 +1,39 @@
+﻿@model Chat.Models.ChatModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Чат на Ajax и JQuery</title>
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/bootstrap.css")
+</head>
+<body>
+    
+    <h4 id="Username">
+    </h4>
+    <div id="LastRefresh">
+    </div>
+    <div id="container">
+        <div id="loginBlock">
+            Введите имя :
+            <input type="text" id="txtUserName" />
+            <button id="btnLogin" class="btn btn-info" value="Войти">Войти</button>
+        </div>
+    </div>
+    <div id="Error">
+    </div>
+    
+    @Ajax.ActionLink("Login", "Index", new { user = "" },
+        new AjaxOptions { UpdateTargetId = "container", OnFailure = "LoginOnFailure", OnSuccess = "LoginOnSuccess" },
+        new { @id = "LoginButton", @style = "visibility:hidden;" })
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Scripts/chat.js")
+   
+</body>
+</html>
